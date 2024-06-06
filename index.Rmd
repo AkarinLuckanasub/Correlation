@@ -1,0 +1,94 @@
+---
+title: "Correlation"
+author: "Akarin Luckanasub"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **Introduction**
+##### This document demonstrates how to perform correlation analysis on the mtcars dataset using the dplyr library for data manipulation. The goal is to understand the relationships between different variables in the dataset.
+
+## **Correlation Analysis**
+
+### **Correlation Between Two Variables**
+##### Start by calculating the correlation between mpg (miles per gallon) and hp (horsepower), and between mpg and wt (weight).
+
+```{r}
+# Correlation between mpg and hp
+cor_mpg_hp <- cor(mtcars$mpg, mtcars$hp)
+cor_mpg_hp
+
+# Correlation between mpg and wt
+cor_mpg_wt <- cor(mtcars$mpg, mtcars$wt)
+cor_mpg_wt
+
+```
+
+### **Scatter Plots**
+##### Plot scatter plots to visualize the relationships between these variables.
+
+```{r}
+# Scatter plot between hp and mpg
+plot(mtcars$hp, mtcars$mpg, pch = 16, 
+     xlab = "Horsepower", ylab = "Miles per Gallon", 
+     main = "Scatter plot of Horsepower vs. MPG")
+
+# Scatter plot between wt and mpg
+plot(mtcars$wt, mtcars$mpg, pch = 16, 
+     xlab = "Weight", ylab = "Miles per Gallon", 
+     main = "Scatter plot of Weight vs. MPG")
+
+# Scatter plot between wt and hp
+plot(mtcars$wt, mtcars$hp, pch = 16, 
+     xlab = "Weight", ylab = "Horsepower", 
+     main = "Scatter plot of Weight vs. Horsepower")
+
+```
+
+### **Correlation Matrix**
+##### calculate a correlation matrix for multiple variables: mpg, wt, and hp.
+
+```{r}
+# Correlation matrix for mpg, wt, and hp
+cor_matrix <- cor(mtcars[, c("mpg", "wt", "hp")])
+cor_matrix
+
+```
+
+##### Using dplyr, we can also create a correlation matrix for selected variables and view it.
+
+```{r}
+# Correlation matrix using dplyr
+library(dplyr)
+cormat <- mtcars %>%
+  select(mpg, wt, hp, am) %>%
+  cor()
+
+# Display correlation matrix
+cormat
+
+```
+
+### **Statistical Significance**
+##### Test the statistical significance of the correlation between mpg and hp.
+
+```{r}
+# Statistical significance of correlation between mpg and hp
+cor_test_mpg_hp <- cor.test(mtcars$mpg, mtcars$hp)
+cor_test_mpg_hp
+
+```
+
+### **Conclusion**
+##### This document demonstrated the process of performing correlation analysis on the mtcars dataset. We calculated correlations between key variables, visualized these relationships using scatter plots, created a correlation matrix, and tested the statistical significance of the correlations.
+
+
+
+
+
+
+
